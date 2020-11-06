@@ -3,7 +3,17 @@
 /* RETRIEVE CURRENTLY LOGGED IN USERS */
 function get_current_users() {
     $logged_in_users = shell_exec('who');
-    print_r($logged_in_users);
+    $split_users = explode("\n", $logged_in_users);
+    
+    $from = date('d-m-y');
+    $to = date('d-m-y', strtotime('+ 7 days'));
+    $path = "datastore/usage ~ ${from} _ ${to}.php";
+
+    foreach ($split_users as $user) {
+        if ( !empty(trim($user)) ) {
+            file_put_contents($path, "\n" . trim($user), FILE_APPEND);
+        }
+    }
 }
 
 get_current_users();
