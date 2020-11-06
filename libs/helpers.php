@@ -79,4 +79,11 @@ function parse_free_space($free_space){
     return $size;
 }
 
+
+function trigger_warning($free_space){
+    if($free_space <= 1024){
+        echo "warning email";
+    }
+}
+
 ?>
