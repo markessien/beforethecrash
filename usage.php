@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
 
 /* RETRIEVE CURRENTLY LOGGED IN USERS */
 function get_current_users() {
@@ -34,4 +32,11 @@ function get_current_users() {
     }
 }
 
+/* FIND TOP TEN LARGEST FILES */
+function find_large_files() {
+    $large_files = shell_exec("find ./ -size +100M -ls");
+    print_r($large_files);
+}
+
 get_current_users();
+find_large_files();
