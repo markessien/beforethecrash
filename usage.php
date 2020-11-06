@@ -10,7 +10,7 @@ function get_current_users() {
     $get_files = array_slice(scandir("datastore/usage_files/"), 2);
     
     if ( count($get_files) ) {
-        $last_file = $get_files[count($get_files) - 1];
+        $last_file = trim($get_files[count($get_files) - 1]);
         $date_string = trim(explode('_', explode('.', $last_file)[0])[1]);
         if ( strtotime($date_string) < time() ) {
             $from = date('d-m-y');
