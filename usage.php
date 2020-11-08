@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 /* RETRIEVE CURRENTLY LOGGED IN USERS */
 function get_current_users() {
@@ -34,8 +36,15 @@ function get_current_users() {
 
 /* FIND TOP TEN LARGEST FILES */
 function find_large_files() {
-    $large_files = shell_exec("find ./ -size +100M -ls");
-    print_r($large_files);
+    $large_files = shell_exec("find ./ -size +100M -ls | head -10");
+    if( !empty(trim($large_files)) ) {
+        $path = "datastore/large_files.txt";
+        $text_file = fopen($path, 'w');
+        foreach(explode("\n", $large_files) as $file) {
+            fwrite($text_file, "\n" . trim($file));
+        }
+        fclose($text_file);
+    }
 }
 
 get_current_users();
