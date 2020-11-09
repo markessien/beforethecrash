@@ -13,7 +13,6 @@ $smtp_creds = [
     'mailfrom' => $_ENV['SMTP_MAILFROM'],
     'mailto' => $_ENV['SMTP_MAILTO'],
 ];
-// echo $_ENV['SMTP_MAILTO'];
 
     date_default_timezone_set("Africa/Lagos");
 

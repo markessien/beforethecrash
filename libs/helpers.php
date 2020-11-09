@@ -192,21 +192,23 @@ $date =  date('d M Y h:i:sa');
         if ( strtotime($date_string) < time() ) { //if last saved file is up to 7 days, create new file path and sends week mail
       
             $from = date('d-m-Y');
-            $to = date('d-m-Y', strtotime('+ 7 days'));
+            $to = date('d-m-Y', strtotime($from,'+1 day'));
             $path = "datastore/disk_info/info_${from}_${to}.json";
-
+            $subject = "HDisk Drives information as at $date";
             $email_body = format_email_body($date,$table);
-            sendmail($email_body,$date,$creds);
+            sendmail($email_body,$creds,$subject);
 
         } else {
+            
             $path = "datastore/disk_info/${last_file}";
         }
     } else {
 
         $from = date('d-m-Y');
-        $to = date('d-m-Y', strtotime('+ 7 days'));
+        $to = date('d-m-Y', strtotime('+ 1 day'));
+        $subject = "HDisk Drives information as at $date";
         $email_body = format_email_body($date,$table);
-        sendmail($email_body,$date,$creds);
+        sendmail($email_body,$creds,$subject);
         $path = "datastore/disk_info/info_${from}_${to}.json";
     }
 
@@ -218,7 +220,8 @@ $date =  date('d M Y h:i:sa');
 
     if($low_space_disk){
         $warning_body = format_email_body($date,$warning_table);
-        sendmail($warning_body,$date,$creds);
+        $subject = "Warning the following disk are available space are below the threshold as at $date";
+        sendmail($warning_body,$creds,$subject);
     }
 
 }
@@ -262,7 +265,7 @@ function get_disk_name($name){
 
 
 
-function sendmail($body,$date,$creds){
+function sendmail($body,$creds,$subject){
 
     $mail = new PHPMailer(true);
 
@@ -283,7 +286,7 @@ function sendmail($body,$date,$creds){
     
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = "HDisk Drives information as at $date";
+        $mail->Subject = $subject;
         $mail->Body    = $body;
     
         $mail->send();
