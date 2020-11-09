@@ -1,6 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 
 /* RETRIEVE CURRENTLY LOGGED IN USERS */
 function get_current_users() {
@@ -11,7 +9,7 @@ function get_current_users() {
     if ( count($get_files) ) {
         $last_file = trim($get_files[count($get_files) - 1]);
         $date_string = trim(explode('_', explode('.', $last_file)[0])[1]);
-        if ( strtotime($date_string) < time() ) {
+        if ( strtotime($date_string) < time() ) { //if last saved file is up to 7 days, create new file
             $from = date('d-m-Y');
             $to = date('d-m-Y', strtotime('+ 7 days'));
             $path = "datastore/usage_files/usage ~ ${from} _ ${to}.txt";
