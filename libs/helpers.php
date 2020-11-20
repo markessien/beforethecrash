@@ -233,7 +233,8 @@ function filter_block_devices($block_devices){
 
     foreach($block_devices as $key=>$block_device){
         if($block_device['mountpoint'] != ''){
-            $new_name = str_replace('|-','',$key);
+            $new_name =preg_replace("/[^A-Za-z0-9 ]/",'',$key);
+
             $mounted_block_devices[$new_name] = $block_device;
             // array_push($mounted_block_devices,$block_device);
         }
