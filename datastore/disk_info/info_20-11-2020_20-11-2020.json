@@ -1,1 +1,0 @@
-{"nvme0n1p6":{"type":"ext4","1k_blocks":"46G","used":"11G","available":"33G","usage_percentage":"25%","mount_point":"\/"},"nvme0n1p7":{"type":"ext4","1k_blocks":"28G","used":"3.6G","available":"23G","usage_percentage":"14%","mount_point":"\/home"}}
