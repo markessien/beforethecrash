@@ -1,7 +1,7 @@
 
 <?php
 
-include('libs/helpers.php');
+include('helpers.php');
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
